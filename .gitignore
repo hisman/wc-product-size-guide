@@ -1,0 +1,20 @@
+# Editors
+project.xml
+project.properties
+/nbproject/private/
+.buildpath
+.project
+.settings*
+.idea
+
+# OS X metadata
+.DS_Store
+
+# Windows junk
+Thumbs.db
+
+# NPM
+/node_modules
+/wc-product-size-guide
+wc-product-size-guide.zip
+package-lock.json
