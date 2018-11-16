@@ -26,6 +26,7 @@ class WPSG_Post_Type {
 	 */
 	public function init_hooks() {
 		add_action( 'init', array( $this, 'register_post_type' ) );
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 	}
 
 	/**
@@ -51,6 +52,24 @@ class WPSG_Post_Type {
 			'capability_type' => 'post',
 			'menu_position' => 30,
 		) );
+	}
+
+	/**
+	 * Add post meta boxes.
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_meta_boxes() {
+		add_meta_box( 'product_size_guide', __( 'Size Guides', 'wc-product-size-guide' ), array( $this, 'product_size_guide_meta' ), 'product', 'side', 'default' );
+	}
+
+	/**
+	 * Product size guide meta box.
+	 *
+	 * @since 1.0.0
+	 */
+	public function product_size_guide_meta() {
+		//
 	}
 
 }
