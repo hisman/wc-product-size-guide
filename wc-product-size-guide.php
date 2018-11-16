@@ -16,3 +16,40 @@
  * @since             1.0.0
  * @package           WC_Product_Size_Guide
  */
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+// Check if WooCommerce is active
+if ( ! in_array('woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+	return;
+}
+
+if ( ! class_exists( 'WC_Product_Size_Guide' ) ) :
+
+class WC_Product_Size_Guide {
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 1.0.0
+	 */
+	public function __construct() {
+		$this->includes();
+	}
+
+	/**
+	 * Include required core files.
+	 *
+	 * @since 1.0.0
+	 */
+	public function includes() {
+		include_once( 'includes/class-wpsg-post-type.php' );
+	}
+
+}
+
+endif;
+
+new WC_Product_Size_Guide();
