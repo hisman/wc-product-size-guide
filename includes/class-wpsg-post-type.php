@@ -62,6 +62,7 @@ class WPSG_Post_Type {
 	 */
 	public function add_meta_boxes() {
 		add_meta_box( 'wpsg_product_size_guide', __( 'Size Guides', 'wc-product-size-guide' ), array( $this, 'product_size_guide_meta' ), 'product', 'side', 'high' );
+		add_meta_box( 'wpsg_size_table', __( 'Size Table', 'wc-product-size-guide' ), array( $this, 'size_table_meta' ), 'size-guide', 'normal', 'high' );
 	}
 
 	/**
@@ -70,16 +71,14 @@ class WPSG_Post_Type {
 	 * @since 1.0.0
 	 */
 	public function product_size_guide_meta( $post ) {
-		$custom_fields = get_post_custom( $post->ID );
 		$product_size_guide = get_post_meta( $post->ID, '_wpsg_product_size_guide', true );
-
 		$size_guides = get_posts( array(
 			'posts_per_page' => -1,
 			'post_type' => 'size-guide',
 			'orderby' => 'title',
 			'order' => 'ASC',
 		) );
-		?>
+	?>
 		<p>
 			<select name="wpsg_product_size_guide" class="wpsg_product_size_guide" style="width: 100%;">
 				<option value="">None</option>
@@ -90,7 +89,19 @@ class WPSG_Post_Type {
 				<?php endforeach; ?>
 			</select>
 		</p>
-		<?php
+	<?php
+	}
+
+	/**
+	 * Product size table meta box.
+	 *
+	 * @since 1.0.0
+	 */
+	public function size_table_meta( $post ) {
+		$size_table = get_post_meta( $post->ID, '_wpsg_size_table', true );
+	?>
+		<textarea type="text" style="width: 100%; display: none;" rows="3" name="sizes_table" id="wpsg_size_table"><?php echo $size_table; ?></textarea>
+	<?php
 	}
 
 	/**

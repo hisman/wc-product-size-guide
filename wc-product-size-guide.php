@@ -31,12 +31,20 @@ if ( ! class_exists( 'WC_Product_Size_Guide' ) ) :
 class WC_Product_Size_Guide {
 
 	/**
+     * Plugin version.
+     *
+     * @var string
+     */
+	public $version = '1.0.0';
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->includes();
+		$this->init_hooks();
 	}
 
 	/**
@@ -47,6 +55,41 @@ class WC_Product_Size_Guide {
 	public function includes() {
 		include_once( 'includes/class-wpsg-post-type.php' );
 	}
+
+	/**
+	 * Hook into actions and filters.
+	 *
+	 * @since 1.0.0
+	 */
+	public function init_hooks() {
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+	}
+
+	/**
+	 * Hook into actions and filters.
+	 *
+	 * @since 1.0.0
+	 */
+	public function admin_scripts( $suffix ) {
+		if ( in_array( $suffix, array( 'post.php', 'post-new.php', 'edit-tags.php' ) ) ) {
+			wp_register_style( 'wpsg-admin-styles', $this->plugin_url() . '/assets/css/admin.css', array(), $this->version );
+
+			wp_register_script( 'wpsg-admin-edittable-scripts', $this->plugin_url() . '/assets/js/jquery.edittable.min.js', array( 'jquery' ), $this->version );
+			wp_register_script( 'wpsg-admin-scripts', $this->plugin_url() . '/assets/js/admin.js', array( 'wpsg-admin-edittable-scripts' ), $this->version );
+
+			wp_enqueue_style( 'wpsg-admin-styles' );
+			wp_enqueue_script( 'wpsg-admin-scripts' );
+		}
+	}
+
+	/**
+     * Get the plugin url.
+     *
+     * @since 1.0.0
+     */
+    public function plugin_url(){
+		return untrailingslashit( plugins_url( '/', __FILE__ ) );
+    }
 
 }
 
