@@ -75,7 +75,7 @@ class WC_Product_Size_Guide {
 			wp_register_style( 'wpsg-admin-styles', $this->plugin_url() . '/assets/css/admin.css', array(), $this->version );
 
 			wp_register_script( 'wpsg-admin-edittable-scripts', $this->plugin_url() . '/assets/js/jquery.edittable.min.js', array( 'jquery' ), $this->version );
-			wp_register_script( 'wpsg-admin-scripts', $this->plugin_url() . '/assets/js/admin.js', array( 'wpsg-admin-edittable-scripts' ), $this->version );
+			wp_register_script( 'wpsg-admin-scripts', $this->plugin_url() . '/assets/js/admin.min.js', array( 'wpsg-admin-edittable-scripts' ), $this->version );
 
 			wp_enqueue_style( 'wpsg-admin-styles' );
 			wp_enqueue_script( 'wpsg-admin-scripts' );
