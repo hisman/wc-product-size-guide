@@ -62,7 +62,7 @@ class WPSG_Post_Type {
 	 */
 	public function add_meta_boxes() {
 		add_meta_box( 'wpsg_product_size_guide', __( 'Size Guides', 'wc-product-size-guide' ), array( $this, 'product_size_guide_meta' ), 'product', 'side', 'high' );
-		add_meta_box( 'wpsg_size_table', __( 'Size Table', 'wc-product-size-guide' ), array( $this, 'size_table_meta' ), 'size-guide', 'normal', 'high' );
+		add_meta_box( 'wpsg_sizes_table', __( 'Sizes Table', 'wc-product-size-guide' ), array( $this, 'sizes_table_meta' ), 'size-guide', 'normal', 'high' );
 	}
 
 	/**
@@ -80,11 +80,11 @@ class WPSG_Post_Type {
 		) );
 	?>
 		<p>
-			<select name="wpsg_product_size_guide" class="wpsg_product_size_guide" style="width: 100%;">
+			<select name="wpsg_product_size_guide" class="wpsg_product_size_guide">
 				<option value="">None</option>
 				<?php foreach ( $size_guides as $size ) : $selected = ( $size->ID == $product_size_guide ) ? 'selected' : ''; ?>
 					<option value="<?php echo esc_attr( $size->ID ); ?>" <?php echo esc_attr( $selected ); ?>>
-						<?php echo esc_attr( $size->post_title ); ?>
+						<?php echo esc_html( $size->post_title ); ?>
 					</option>
 				<?php endforeach; ?>
 			</select>
@@ -97,10 +97,12 @@ class WPSG_Post_Type {
 	 *
 	 * @since 1.0.0
 	 */
-	public function size_table_meta( $post ) {
-		$size_table = get_post_meta( $post->ID, '_wpsg_size_table', true );
+	public function sizes_table_meta( $post ) {
+		$sizes_table = get_post_meta( $post->ID, '_wpsg_sizes_table', true );
 	?>
-		<textarea type="text" style="width: 100%; display: none;" rows="3" name="sizes_table" id="wpsg_size_table"><?php echo $size_table; ?></textarea>
+		<p>
+			<textarea id="wpsg_sizes_table_textarea" class="wpsg_sizes_table_textarea" type="text" rows="3" name="wpsg_sizes_table"><?php echo esc_html( $sizes_table ); ?></textarea>
+		<p>
 	<?php
 	}
 
@@ -126,6 +128,11 @@ class WPSG_Post_Type {
 		if ( isset( $_POST['wpsg_product_size_guide'] ) ) {
 			$product_size_guide = sanitize_text_field( $_POST['wpsg_product_size_guide'] );
 			update_post_meta( $post_id, '_wpsg_product_size_guide', $product_size_guide );
+		}
+
+		if ( isset( $_POST['wpsg_sizes_table'] ) ) {
+			$sizes_table = sanitize_text_field( $_POST['wpsg_sizes_table'] );
+			update_post_meta( $post_id, '_wpsg_sizes_table', $sizes_table );
 		}
 	}
 
