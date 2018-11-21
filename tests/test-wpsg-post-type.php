@@ -31,4 +31,41 @@ class Test_WPSG_Post_Type extends WPSG_Test_Case {
 		$this->assertTrue( array_key_exists( 'size-guide', $wp_post_types ) );
 	}
 
+	/**
+	 * Test product size guide meta box.
+	 *
+	 * @since 1.0.0
+	 */
+	public function test_product_size_guide_meta() {
+		$post_id = $this->factory->post->create( array(
+			'post_name' => 'test',
+			'post_title' => 'Test',
+			'post_status' => 'publish',
+		) );
+
+		$post = get_post( $post_id );
+
+		$this->expectOutputRegex( '/<select name="wpsg_product_size_guide" class="wpsg_product_size_guide">/' );
+		$this->post_type_instance->product_size_guide_meta( $post );
+	}
+
+	/**
+	 * Test sizes table meta box.
+	 *
+	 * @since 1.0.0
+	 */
+	public function test_sizes_table_meta() {
+		$post_id = $this->factory->post->create( array(
+			'post_name' => 'test-size',
+			'post_title' => 'Test Size',
+			'post_type' => 'size-guide',
+			'post_status' => 'publish',
+		) );
+
+		$post = get_post( $post_id );
+
+		$this->expectOutputRegex( '/<textarea id="wpsg_sizes_table_textarea" class="wpsg_sizes_table_textarea"/' );
+		$this->post_type_instance->sizes_table_meta( $post );
+	}
+
 }

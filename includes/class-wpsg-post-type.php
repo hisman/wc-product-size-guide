@@ -26,6 +26,8 @@ class WPSG_Post_Type {
 	 */
 	public function init_hooks() {
 		add_action( 'init', array( $this, 'register_post_type' ) );
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+		add_action( 'save_post', array( $this, 'save_meta_boxes' ), 1, 2 );
 	}
 
 	/**
@@ -51,6 +53,87 @@ class WPSG_Post_Type {
 			'capability_type' => 'post',
 			'menu_position' => 30,
 		) );
+	}
+
+	/**
+	 * Add post meta boxes.
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_meta_boxes() {
+		add_meta_box( 'wpsg_product_size_guide', __( 'Size Guides', 'wc-product-size-guide' ), array( $this, 'product_size_guide_meta' ), 'product', 'side', 'high' );
+		add_meta_box( 'wpsg_sizes_table', __( 'Sizes Table', 'wc-product-size-guide' ), array( $this, 'sizes_table_meta' ), 'size-guide', 'normal', 'high' );
+	}
+
+	/**
+	 * Product size guide meta box.
+	 *
+	 * @since 1.0.0
+	 */
+	public function product_size_guide_meta( $post ) {
+		$product_size_guide = get_post_meta( $post->ID, '_wpsg_product_size_guide', true );
+		$size_guides = get_posts( array(
+			'posts_per_page' => -1,
+			'post_type' => 'size-guide',
+			'orderby' => 'title',
+			'order' => 'ASC',
+		) );
+	?>
+		<p>
+			<select name="wpsg_product_size_guide" class="wpsg_product_size_guide">
+				<option value="">None</option>
+				<?php foreach ( $size_guides as $size ) : $selected = ( $size->ID == $product_size_guide ) ? 'selected' : ''; ?>
+					<option value="<?php echo esc_attr( $size->ID ); ?>" <?php echo esc_attr( $selected ); ?>>
+						<?php echo esc_html( $size->post_title ); ?>
+					</option>
+				<?php endforeach; ?>
+			</select>
+		</p>
+	<?php
+	}
+
+	/**
+	 * Product size table meta box.
+	 *
+	 * @since 1.0.0
+	 */
+	public function sizes_table_meta( $post ) {
+		$sizes_table = get_post_meta( $post->ID, '_wpsg_sizes_table', true );
+	?>
+		<p>
+			<textarea id="wpsg_sizes_table_textarea" class="wpsg_sizes_table_textarea" type="text" rows="3" name="wpsg_sizes_table"><?php echo esc_html( $sizes_table ); ?></textarea>
+		<p>
+	<?php
+	}
+
+	/**
+	 * Save meta boxes.
+	 *
+	 * @since 1.0.0
+	 */
+	public function save_meta_boxes( $post_id, $post ) {
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return $post_id;
+		}
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return $post_id;
+		}
+
+		$slugs = array( 'size-guide', 'product' );
+		if ( ! in_array( $post->post_type, $slugs ) ) {
+			return $post_id;
+		}
+
+		if ( isset( $_POST['wpsg_product_size_guide'] ) ) {
+			$product_size_guide = sanitize_text_field( $_POST['wpsg_product_size_guide'] );
+			update_post_meta( $post_id, '_wpsg_product_size_guide', $product_size_guide );
+		}
+
+		if ( isset( $_POST['wpsg_sizes_table'] ) ) {
+			$sizes_table = sanitize_text_field( $_POST['wpsg_sizes_table'] );
+			update_post_meta( $post_id, '_wpsg_sizes_table', $sizes_table );
+		}
 	}
 
 }
