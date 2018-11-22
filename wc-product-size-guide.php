@@ -26,6 +26,11 @@ if ( ! in_array('woocommerce/woocommerce.php', apply_filters( 'active_plugins', 
 	return;
 }
 
+// Define WPSG_PLUGIN_FILE.
+if ( ! defined( 'WPSG_PLUGIN_FILE' ) ) {
+	define( 'WPSG_PLUGIN_FILE', __FILE__ );
+}
+
 if ( ! class_exists( 'WC_Product_Size_Guide' ) ) :
 
 class WC_Product_Size_Guide {
@@ -54,6 +59,7 @@ class WC_Product_Size_Guide {
 	 */
 	public function includes() {
 		include_once( 'includes/class-wpsg-post-type.php' );
+		include_once( 'includes/class-wpsg-frontend.php' );
 	}
 
 	/**
@@ -88,7 +94,7 @@ class WC_Product_Size_Guide {
      * @since 1.0.0
      */
     public function plugin_url(){
-		return untrailingslashit( plugins_url( '/', __FILE__ ) );
+		return untrailingslashit( plugins_url( '/', WPSG_PLUGIN_FILE ) );
     }
 
 }
