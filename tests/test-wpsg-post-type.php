@@ -2,7 +2,7 @@
 /**
  * Class Test_WPSG_Post_Type
  *
- * @package WC_Product_Size_Guide
+ * @package WC_Product_Size_Guide/Tests
  * @since 1.0.0
  */
 

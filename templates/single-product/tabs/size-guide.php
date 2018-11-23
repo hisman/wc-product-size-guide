@@ -18,12 +18,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-global $post;
-
 $heading = esc_html( apply_filters( 'wpsg_size_guide_tab_heading', __( 'Size Guide', 'wc-product-size-guide' ) ) );
-
 ?>
 
 <?php if ( $heading ) : ?>
-  <h2><?php echo $heading; ?></h2>
+	<h2><?php echo $heading; ?></h2>
 <?php endif; ?>
+
+<div>
+	<?php if ( $size_guide->get_content() != '' ) : ?>
+		<div>
+			<?php echo $size_guide->get_content(); ?>
+		</div>
+	<?php endif; ?>
+
+	<?php if ( $size_guide->get_image() != '' ) : ?>
+		<div>
+			<?php echo $size_guide->get_image(); ?>
+		</div>
+	<?php endif; ?>
+
+	<?php if ( is_array( $size_guide->get_table() ) ) : ?>
+		<table>
+			<body>
+			<?php foreach ( $size_guide->get_table() as $r => $row ) : ?>
+				<tr>
+				<?php foreach ( $row as $c => $column ) : ?>
+					<?php if ( $r === 0 ) : ?>
+						<th><?php echo esc_html( $column ); ?></th>
+					<?php else : ?>
+						<td><?php echo esc_html( $column ); ?></td>
+					<?php endif; ?>
+				<?php endforeach; ?>
+				</tr>
+			<?php endforeach; ?>
+			</body>
+		</table>
+	<?php endif; ?>
+</div>
