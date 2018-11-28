@@ -61,6 +61,7 @@ class WC_Product_Size_Guide {
 		include_once( 'includes/class-wpsg-admin.php' );
 		include_once( 'includes/class-wpsg-frontend.php' );
 		include_once( 'includes/wpsg-template-functions.php' );
+		include_once( 'includes/wpsg-template-hooks.php' );
 	}
 
 }

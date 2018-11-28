@@ -11,6 +11,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Get the plugin url.
+ *
+ * @since 1.0.0
+ */
+function wpsg_get_plugin_url(){
+	return untrailingslashit( plugins_url( '/', WPSG_PLUGIN_FILE ) );
+}
+
+/**
  * Get template.
  *
  * @since 1.0.0

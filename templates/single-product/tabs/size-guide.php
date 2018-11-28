@@ -25,34 +25,25 @@ $heading = esc_html( apply_filters( 'wpsg_size_guide_tab_heading', __( 'Size Gui
 	<h2><?php echo $heading; ?></h2>
 <?php endif; ?>
 
-<div>
-	<?php if ( $size_guide->get_content() != '' ) : ?>
-		<div>
-			<?php echo $size_guide->get_content(); ?>
-		</div>
-	<?php endif; ?>
+<?php
+/**
+ * Hook: wpsg_size_guide_content.
+ *
+ * @hooked wpsg_template_size_guide_content - 10
+ */
+do_action( 'wpsg_size_guide_content', $size_guide );
 
-	<?php if ( $size_guide->get_image() != '' ) : ?>
-		<div>
-			<?php echo $size_guide->get_image(); ?>
-		</div>
-	<?php endif; ?>
+/**
+ * Hook: wpsg_size_guide_image.
+ *
+ * @hooked wpsg_template_size_guide_image - 10
+ */
+do_action( 'wpsg_size_guide_image', $size_guide );
 
-	<?php if ( is_array( $size_guide->get_table() ) ) : ?>
-		<table>
-			<body>
-			<?php foreach ( $size_guide->get_table() as $r => $row ) : ?>
-				<tr>
-				<?php foreach ( $row as $c => $column ) : ?>
-					<?php if ( $r === 0 ) : ?>
-						<th><?php echo esc_html( $column ); ?></th>
-					<?php else : ?>
-						<td><?php echo esc_html( $column ); ?></td>
-					<?php endif; ?>
-				<?php endforeach; ?>
-				</tr>
-			<?php endforeach; ?>
-			</body>
-		</table>
-	<?php endif; ?>
-</div>
+/**
+ * Hook: wpsg_size_guide_table.
+ *
+ * @hooked wpsg_template_size_guide_table - 10
+ */
+do_action( 'wpsg_size_guide_table', $size_guide );
+?>

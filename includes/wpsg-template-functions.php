@@ -11,20 +11,84 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Get size guide id.
+ *
+ * @since 1.0.0
+ */
+if ( ! function_exists( 'wpsg_get_size_guide_id' ) ) {
+	function wpsg_get_size_guide_id( $product ) {
+		return get_post_meta( $product->get_id(), '_wpsg_product_size_guide', true );
+	}
+}
+
+/**
  * Get size guide.
  *
  * @since 1.0.0
  */
 if ( ! function_exists( 'wpsg_get_size_guide' ) ) {
-	function wpsg_get_size_guide( $post_id ) {
-		$post = get_post( $post_id );
+	function wpsg_get_size_guide( $product ) {
+		$size_guide_id = wpsg_get_size_guide_id( $product );
+		if ( ! $size_guide_id ) {
+			return false;
+		}
 
+		$post = get_post( $size_guide_id );
 		if ( ! $post ) {
 			return false;
 		}
 
-		$size_guide = new WPSG_Size_Guide( $post );
+		return new WPSG_Size_Guide( $post );
+	}
+}
 
-		return $size_guide;
+/**
+ * Show size guide content.
+ *
+ * @since 1.0.0
+ */
+if ( ! function_exists( 'wpsg_template_size_guide_content' ) ) {
+	function wpsg_template_size_guide_content( $size_guide ) {
+		if ( $size_guide->get_content() == '' ) {
+			return;
+		}
+
+		wpsg_get_template( 'size-guide/content.php', array(
+			'size_content' => $size_guide->get_content(),
+		) );
+	}
+}
+
+/**
+ * Show size guide image.
+ *
+ * @since 1.0.0
+ */
+if ( ! function_exists( 'wpsg_template_size_guide_image' ) ) {
+	function wpsg_template_size_guide_image( $size_guide ) {
+		if ( $size_guide->get_image() == '' ) {
+			return;
+		}
+
+		wpsg_get_template( 'size-guide/image.php', array(
+			'size_image' => $size_guide->get_image(),
+		) );
+	}
+}
+
+/**
+ * Show size guide table.
+ *
+ * @since 1.0.0
+ */
+if ( ! function_exists( 'wpsg_template_size_guide_table' ) ) {
+	function wpsg_template_size_guide_table( $size_guide ) {
+		if ( $size_guide->get_table() == '' ) {
+			return;
+		}
+
+		wpsg_get_template( 'size-guide/table.php', array(
+			'size_table' => $size_guide->get_table(),
+		) );
 	}
 }

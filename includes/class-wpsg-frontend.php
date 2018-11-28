@@ -38,10 +38,10 @@ class WPSG_Frontend {
 	 * @since 1.0.0
 	 */
 	public function product_tabs( $tabs ) {
-		global $post;
-		$size_guide_id = get_post_meta( $post->ID, '_wpsg_product_size_guide', true );
+		global $product, $size_guide;
+		$size_guide = wpsg_get_size_guide( $product );
 
-		if (  $size_guide_id ) {
+		if ( $size_guide ) {
 			$tabs['size_guide'] = array(
 				'title' => __( 'Size Guide', 'wc-product-size-guide' ),
 				'priority' => 20,
@@ -58,12 +58,11 @@ class WPSG_Frontend {
 	 * @since 1.0.0
 	 */
 	public function size_guide_tabs() {
-		global $post;
+		global $size_guide;
 
-		$size_guide_id = get_post_meta( $post->ID, '_wpsg_product_size_guide', true );
-		$size_guide = wpsg_get_size_guide( $size_guide_id );
-
-		wpsg_get_template( 'single-product/tabs/size-guide.php', compact( 'size_guide' ) );
+		wpsg_get_template( 'single-product/tabs/size-guide.php', array(
+			'size_guide' => $size_guide,
+		) );
 	}
 
 }
