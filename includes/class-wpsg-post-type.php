@@ -2,9 +2,13 @@
 /**
  * Class WPSG_Post_Type
  *
- * @package WC_Product_Size_Guide
+ * @package WC_Product_Size_Guide/Classes
  * @since 1.0.0
  */
+// If this file is called directly, abort.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'WPSG_Post_Type' ) ) :
 
