@@ -31,16 +31,14 @@ if ( ! defined( 'WPSG_PLUGIN_FILE' ) ) {
 	define( 'WPSG_PLUGIN_FILE', __FILE__ );
 }
 
+// Define WPSG_PLUGIN_FILE.
+if ( ! defined( 'WPSG_PLUGIN_VERSION' ) ) {
+	define( 'WPSG_PLUGIN_VERSION', '1.0.0' );
+}
+
 if ( ! class_exists( 'WC_Product_Size_Guide' ) ) :
 
 class WC_Product_Size_Guide {
-
-	/**
-     * Plugin version.
-     *
-     * @var string
-     */
-	public $version = '1.0.0';
 
 	/**
 	 * Constructor.
@@ -49,7 +47,6 @@ class WC_Product_Size_Guide {
 	 */
 	public function __construct() {
 		$this->includes();
-		$this->init_hooks();
 	}
 
 	/**
@@ -61,44 +58,10 @@ class WC_Product_Size_Guide {
 		include_once( 'includes/wpsg-core-functions.php' );
 		include_once( 'includes/class-wpsg-post-type.php' );
 		include_once( 'includes/class-wpsg-size-guide.php' );
+		include_once( 'includes/class-wpsg-admin.php' );
 		include_once( 'includes/class-wpsg-frontend.php' );
 		include_once( 'includes/wpsg-template-functions.php' );
 	}
-
-	/**
-	 * Hook into actions and filters.
-	 *
-	 * @since 1.0.0
-	 */
-	public function init_hooks() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
-	}
-
-	/**
-	 * Hook into actions and filters.
-	 *
-	 * @since 1.0.0
-	 */
-	public function admin_scripts( $suffix ) {
-		if ( in_array( $suffix, array( 'post.php', 'post-new.php', 'edit-tags.php' ) ) ) {
-			wp_register_style( 'wpsg-admin-styles', $this->plugin_url() . '/assets/css/admin.css', array(), $this->version );
-
-			wp_register_script( 'wpsg-admin-edittable-scripts', $this->plugin_url() . '/assets/js/jquery.edittable.min.js', array( 'jquery' ), $this->version );
-			wp_register_script( 'wpsg-admin-scripts', $this->plugin_url() . '/assets/js/admin.min.js', array( 'wpsg-admin-edittable-scripts' ), $this->version );
-
-			wp_enqueue_style( 'wpsg-admin-styles' );
-			wp_enqueue_script( 'wpsg-admin-scripts' );
-		}
-	}
-
-	/**
-     * Get the plugin url.
-     *
-     * @since 1.0.0
-     */
-    public function plugin_url(){
-		return untrailingslashit( plugins_url( '/', WPSG_PLUGIN_FILE ) );
-    }
 
 }
 
