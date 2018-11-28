@@ -29,22 +29,22 @@ class WPSG_Admin {
 	 * @since 1.0.0
 	 */
 	public function init_hooks() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_assets' ) );
 	}
 
 	/**
-	 * Hook into actions and filters.
+	 * Load admin assets.
 	 *
 	 * @since 1.0.0
 	 */
-	public function admin_scripts( $suffix ) {
+	public function admin_assets( $suffix ) {
 		if ( in_array( $suffix, array( 'post.php', 'post-new.php', 'edit-tags.php' ) ) ) {
-			wp_register_style( 'wpsg-admin-styles', wpsg_get_plugin_url() . '/assets/css/admin.css', array(), WPSG_PLUGIN_VERSION );
+			wp_register_style( 'wpsg-admin-style', wpsg_get_plugin_url() . '/assets/css/admin.css', array(), WPSG_PLUGIN_VERSION );
 
 			wp_register_script( 'wpsg-admin-edittable-scripts', wpsg_get_plugin_url() . '/assets/js/jquery.edittable.min.js', array( 'jquery' ), WPSG_PLUGIN_VERSION );
 			wp_register_script( 'wpsg-admin-scripts', wpsg_get_plugin_url() . '/assets/js/admin.min.js', array( 'wpsg-admin-edittable-scripts' ), WPSG_PLUGIN_VERSION );
 
-			wp_enqueue_style( 'wpsg-admin-styles' );
+			wp_enqueue_style( 'wpsg-admin-style' );
 			wp_enqueue_script( 'wpsg-admin-scripts' );
 		}
 	}

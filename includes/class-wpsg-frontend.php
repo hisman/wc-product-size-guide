@@ -29,7 +29,18 @@ class WPSG_Frontend {
 	 * @since 1.0.0
 	 */
 	public function init_hooks() {
+		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_assets' ) );
 		add_filter( 'woocommerce_product_tabs', array( $this, 'product_tabs' ), 20 );
+	}
+
+	/**
+	 * Load frontend assets.
+	 *
+	 * @since 1.0.0
+	 */
+	public function frontend_assets() {
+		wp_register_style( 'wpsg-frontend-style', wpsg_get_plugin_url() . '/assets/css/style.css', array(), WPSG_PLUGIN_VERSION );
+		wp_enqueue_style( 'wpsg-frontend-style' );
 	}
 
 	/**
