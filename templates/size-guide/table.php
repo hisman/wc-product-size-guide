@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php foreach ( $size_table as $r => $row ) : ?>
 		<tr>
 		<?php foreach ( $row as $c => $column ) : ?>
-			<?php if ( $r === 0 ) : ?>
+			<?php if ( $r === 0 || $c === 0 ) : ?>
 				<th><?php echo esc_html( $column ); ?></th>
 			<?php else : ?>
 				<td><?php echo esc_html( $column ); ?></td>
