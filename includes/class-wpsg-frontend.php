@@ -63,17 +63,8 @@ class WPSG_Frontend {
 		$size_guide_id = get_post_meta( $post->ID, '_wpsg_product_size_guide', true );
 		$size_guide = wpsg_get_size_guide( $size_guide_id );
 
-		wc_get_template( 'single-product/tabs/size-guide.php', compact( 'size_guide' ), '', $this->plugin_path() . '/templates/' );
+		wpsg_get_template( 'single-product/tabs/size-guide.php', compact( 'size_guide' ) );
 	}
-
-	/**
-     * Get the plugin path.
-     *
-     * @since 1.0.0
-     */
-    public function plugin_path(){
-		return untrailingslashit( plugin_dir_path( WPSG_PLUGIN_FILE ) );
-    }
 
 }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * WC_Product_Size_Guide Functions
+ * WC_Product_Size_Guide Template Functions
  *
  * @package  WC_Product_Size_Guide/Functions
  * @since  1.0.0

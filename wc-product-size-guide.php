@@ -58,10 +58,11 @@ class WC_Product_Size_Guide {
 	 * @since 1.0.0
 	 */
 	public function includes() {
+		include_once( 'includes/wpsg-core-functions.php' );
 		include_once( 'includes/class-wpsg-post-type.php' );
 		include_once( 'includes/class-wpsg-size-guide.php' );
 		include_once( 'includes/class-wpsg-frontend.php' );
-		include_once( 'includes/wpsg-functions.php' );
+		include_once( 'includes/wpsg-template-functions.php' );
 	}
 
 	/**
