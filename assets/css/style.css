@@ -1,1 +1,1 @@
-.size-guide-content,.size-guide-image,.size-guide-table{margin-bottom:1rem}.size-guide-image img{max-width:100%}.size-guide-table{width:100%;border-spacing:0;border-collapse:collapse}.size-guide-table td,.size-guide-table th{text-align:center;padding:1rem}
+.size-guide-content,.size-guide-image,.size-guide-table{margin-bottom:1rem}.size-guide-image img{max-width:100%;margin:auto}.size-guide-table-container{width:100%;overflow-x:auto}.size-guide-table{width:100%;border-spacing:0;border-collapse:collapse}.size-guide-table td,.size-guide-table th{text-align:center;padding:1rem}
