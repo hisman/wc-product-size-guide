@@ -27,13 +27,6 @@ $heading = esc_html( apply_filters( 'wpsg_size_guide_tab_heading', __( 'Size Gui
 
 <?php
 /**
- * Hook: wpsg_size_guide_content.
- *
- * @hooked wpsg_template_size_guide_content - 10
- */
-do_action( 'wpsg_size_guide_content', $size_guide );
-
-/**
  * Hook: wpsg_size_guide_image.
  *
  * @hooked wpsg_template_size_guide_image - 10
@@ -41,9 +34,15 @@ do_action( 'wpsg_size_guide_content', $size_guide );
 do_action( 'wpsg_size_guide_image', $size_guide );
 
 /**
+ * Hook: wpsg_size_guide_content.
+ *
+ * @hooked wpsg_template_size_guide_content - 10
+ */
+do_action( 'wpsg_size_guide_content', $size_guide );
+
+/**
  * Hook: wpsg_size_guide_table.
  *
  * @hooked wpsg_template_size_guide_table - 10
  */
 do_action( 'wpsg_size_guide_table', $size_guide );
-?>

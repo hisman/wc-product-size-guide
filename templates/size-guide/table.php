@@ -18,18 +18,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 ?>
-<table class="size-guide-table">
-	<body>
-	<?php foreach ( $size_table as $r => $row ) : ?>
-		<tr>
-		<?php foreach ( $row as $c => $column ) : ?>
-			<?php if ( $r === 0 || $c === 0 ) : ?>
-				<th><?php echo esc_html( $column ); ?></th>
-			<?php else : ?>
-				<td><?php echo esc_html( $column ); ?></td>
-			<?php endif; ?>
+<div class="size-guide-table-container">
+	<table class="size-guide-table">
+		<body>
+		<?php foreach ( $size_table as $r => $row ) : ?>
+			<tr>
+			<?php foreach ( $row as $c => $column ) : ?>
+				<?php if ( $r === 0 || $c === 0 ) : ?>
+					<th><?php echo esc_html( $column ); ?></th>
+				<?php else : ?>
+					<td><?php echo esc_html( $column ); ?></td>
+				<?php endif; ?>
+			<?php endforeach; ?>
+			</tr>
 		<?php endforeach; ?>
-		</tr>
-	<?php endforeach; ?>
-	</body>
-</table>
+		</body>
+	</table>
+</div>
