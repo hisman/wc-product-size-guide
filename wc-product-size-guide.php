@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Product Size Guide for WooCommerce
- * Plugin URI:        https://hisman.co
+ * Plugin URI:        https://plugins.hisman.co/product-size-guide-for-woocommerce
  * Description:       Allows you to add size guides for your WooCommerce products.
  * Version:           1.0.0
  * Author:            Hisman
