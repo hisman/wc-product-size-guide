@@ -65,35 +65,7 @@ class WPSG_Post_Type {
 	 * @since 1.0.0
 	 */
 	public function add_meta_boxes() {
-		add_meta_box( 'wpsg_product_size_guide', __( 'Size Guides', 'wc-product-size-guide' ), array( $this, 'product_size_guide_meta' ), 'product', 'side', 'high' );
 		add_meta_box( 'wpsg_sizes_table', __( 'Sizes Table', 'wc-product-size-guide' ), array( $this, 'sizes_table_meta' ), 'size-guide', 'normal', 'high' );
-	}
-
-	/**
-	 * Product size guide meta box.
-	 *
-	 * @since 1.0.0
-	 */
-	public function product_size_guide_meta( $post ) {
-		$product_size_guide = get_post_meta( $post->ID, '_wpsg_product_size_guide', true );
-		$size_guides = get_posts( array(
-			'posts_per_page' => -1,
-			'post_type' => 'size-guide',
-			'orderby' => 'title',
-			'order' => 'ASC',
-		) );
-	?>
-		<p>
-			<select name="wpsg_product_size_guide" class="wpsg_product_size_guide">
-				<option value="">None</option>
-				<?php foreach ( $size_guides as $size ) : $selected = ( $size->ID == $product_size_guide ) ? 'selected' : ''; ?>
-					<option value="<?php echo esc_attr( $size->ID ); ?>" <?php echo esc_attr( $selected ); ?>>
-						<?php echo esc_html( $size->post_title ); ?>
-					</option>
-				<?php endforeach; ?>
-			</select>
-		</p>
-	<?php
 	}
 
 	/**
@@ -124,14 +96,9 @@ class WPSG_Post_Type {
 			return $post_id;
 		}
 
-		$slugs = array( 'size-guide', 'product' );
+		$slugs = array( 'size-guide' );
 		if ( ! in_array( $post->post_type, $slugs ) ) {
 			return $post_id;
-		}
-
-		if ( isset( $_POST['wpsg_product_size_guide'] ) ) {
-			$product_size_guide = sanitize_text_field( $_POST['wpsg_product_size_guide'] );
-			update_post_meta( $post_id, '_wpsg_product_size_guide', $product_size_guide );
 		}
 
 		if ( isset( $_POST['wpsg_sizes_table'] ) ) {
