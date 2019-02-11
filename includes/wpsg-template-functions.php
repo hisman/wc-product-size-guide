@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 if ( ! function_exists( 'wpsg_get_size_guide_id' ) ) {
 	function wpsg_get_size_guide_id( $product ) {
-		return get_post_meta( $product->get_id(), '_wpsg_product_size_guide', true );
+		return $product->get_meta( '_wpsg_product_size_guide' );
 	}
 }
 

@@ -32,24 +32,6 @@ class Test_WPSG_Post_Type extends WPSG_Test_Case {
 	}
 
 	/**
-	 * Test product size guide meta box.
-	 *
-	 * @since 1.0.0
-	 */
-	public function test_product_size_guide_meta() {
-		$post_id = $this->factory->post->create( array(
-			'post_name' => 'test',
-			'post_title' => 'Test',
-			'post_status' => 'publish',
-		) );
-
-		$post = get_post( $post_id );
-
-		$this->expectOutputRegex( '/<select name="wpsg_product_size_guide" class="wpsg_product_size_guide">/' );
-		$this->post_type_instance->product_size_guide_meta( $post );
-	}
-
-	/**
 	 * Test sizes table meta box.
 	 *
 	 * @since 1.0.0
