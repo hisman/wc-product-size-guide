@@ -23,18 +23,10 @@ require_once $_tests_dir . '/includes/functions.php';
  * Manually load the plugin being tested.
  */
 function _manually_load_plugin() {
+	require rtrim( sys_get_temp_dir(), '/\\' ) . '/wordpress/wp-content/plugins/woocommerce/woocommerce.php';
 	require dirname( dirname( __FILE__ ) ) . '/wc-product-size-guide.php';
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
-
-/**
- * Add WooCommerce to active plugins.
- */
-function _active_plugins( $plugins ) {
-	$plugins[] = 'woocommerce/woocommerce.php';
-	return $plugins;
-}
-tests_add_filter( 'active_plugins', '_active_plugins' );
 
 // Start up the WP testing environment.
 require $_tests_dir . '/includes/bootstrap.php';

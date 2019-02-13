@@ -25,7 +25,11 @@ download() {
     fi
 }
 
-if [[ $WP_VERSION =~ ^[0-9]+\.[0-9]+$ ]]; then
+if [[ $WP_VERSION =~ ^[0-9]+\.[0-9]+\-(beta|RC)[0-9]+$ ]]; then
+	WP_BRANCH=${WP_VERSION%\-*}
+	WP_TESTS_TAG="branches/$WP_BRANCH"
+
+elif [[ $WP_VERSION =~ ^[0-9]+\.[0-9]+$ ]]; then
 	WP_TESTS_TAG="branches/$WP_VERSION"
 elif [[ $WP_VERSION =~ [0-9]+\.[0-9]+\.[0-9]+ ]]; then
 	if [[ $WP_VERSION =~ [0-9]+\.[0-9]+\.[0] ]]; then
@@ -47,7 +51,6 @@ else
 	fi
 	WP_TESTS_TAG="tags/$LATEST_VERSION"
 fi
-
 set -ex
 
 install_wp() {
@@ -147,6 +150,33 @@ install_db() {
 	mysqladmin create $DB_NAME --user="$DB_USER" --password="$DB_PASS"$EXTRA
 }
 
+install_deps() {
+
+	# Script Variables
+	WP_SITE_URL="http://local.wordpress.test"
+	WORKING_DIR="$PWD"
+
+	# Set up WordPress using wp-cli
+	mkdir -p "$WP_CORE_DIR"
+	cd "$WP_CORE_DIR"
+
+	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+	php wp-cli.phar core config --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbhost=$DB_HOST --dbprefix=wptests_
+	php wp-cli.phar core install --url="$WP_SITE_URL" --title="Example" --admin_user=admin --admin_password=password --admin_email=info@example.com --path=$WP_CORE_DIR --skip-email
+
+	# Install WooCommerce
+	cd "wp-content/plugins/"
+	# As zip file does not include tests, we have to get it from git repo.
+	git clone --depth 1 https://github.com/woocommerce/woocommerce.git
+	cd "$WP_CORE_DIR"
+	php wp-cli.phar plugin activate woocommerce
+
+	# Back to original dir
+	cd "$WORKING_DIR"
+
+}
+
 install_wp
 install_test_suite
 install_db
+install_deps
