@@ -18,6 +18,6 @@ Thumbs.db
 /wc-product-size-guide
 wc-product-size-guide.zip
 package-lock.json
-/assets/css/admin.css
-/assets/css/style.css
+/assets/css/*.css
 /assets/js/admin.min.js
+/assets/js/scripts.min.js

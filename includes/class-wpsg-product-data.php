@@ -29,7 +29,7 @@ class WPSG_Product_data {
 	 * @since 1.0.0
 	 */
 	public function init_hooks() {
-		add_action( 'woocommerce_product_options_general_product_data', array( $this, 'size_guide_field' ) );
+		add_action( 'woocommerce_product_options_advanced', array( $this, 'size_guide_field' ) );
 		add_action( 'woocommerce_process_product_meta', array( $this, 'save_size_guide_field' ) );
 	}
 
