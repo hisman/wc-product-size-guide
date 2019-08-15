@@ -46,7 +46,17 @@ class WC_Product_Size_Guide {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+		$this->init_hooks();
 		$this->includes();
+	}
+
+	/**
+	 * Hook into actions and filters.
+	 *
+	 * @since 1.0.0
+	 */
+	public function init_hooks() {
+		add_filter( 'plugin_action_links_' . plugin_basename( WPSG_PLUGIN_FILE ), array( $this, 'plugin_action_links' ) );
 	}
 
 	/**
@@ -56,6 +66,7 @@ class WC_Product_Size_Guide {
 	 */
 	public function includes() {
 		include_once( 'includes/wpsg-core-functions.php' );
+		include_once( 'includes/class-wpsg-settings.php' );
 		include_once( 'includes/class-wpsg-post-type.php' );
 		include_once( 'includes/class-wpsg-product-data.php' );
 		include_once( 'includes/class-wpsg-size-guide.php' );
@@ -64,6 +75,21 @@ class WC_Product_Size_Guide {
 		include_once( 'includes/wpsg-template-functions.php' );
 		include_once( 'includes/wpsg-template-hooks.php' );
 	}
+
+	/**
+     * Show action links on the plugin screen.
+     *
+     * @param	mixed $links Plugin Action links
+     * @return  array
+     * @since   1.0.0
+     **/
+	public function plugin_action_links( $links ){
+        $action_links = array(
+			'settings' => '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=products&section=wc-product-size-guide' ) . '" aria-label="' . esc_attr__( 'View Product Size Guide settings', 'wc-product-size-guide' ) . '">' . esc_html__( 'Settings', 'wc-product-size-guide' ) . '</a>',
+		);
+
+		return array_merge( $action_links, $links );
+    }
 
 }
 
