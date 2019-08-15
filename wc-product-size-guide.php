@@ -56,6 +56,7 @@ class WC_Product_Size_Guide {
 	 */
 	public function includes() {
 		include_once( 'includes/wpsg-core-functions.php' );
+		include_once( 'includes/class-wpsg-settings.php' );
 		include_once( 'includes/class-wpsg-post-type.php' );
 		include_once( 'includes/class-wpsg-product-data.php' );
 		include_once( 'includes/class-wpsg-size-guide.php' );
