@@ -10,7 +10,7 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       wc-product-size-guide
  * Domain Path:       /languages
- * WC tested up to:      3.5.2
+ * WC tested up to:      3.9.2
  * WC requires at least: 3.0.0
  *
  * @since             1.0.0
