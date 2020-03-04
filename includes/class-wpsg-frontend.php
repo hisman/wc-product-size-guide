@@ -33,8 +33,10 @@ class WPSG_Frontend {
 
 		add_action( 'woocommerce_before_single_product', array( $this, 'get_size_guide' ) );
 
-		add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'popup_button' ) );
-		add_action( 'wp_footer', array( $this, 'popup' ) );
+		if ( false ) {
+			add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'popup_button' ) );
+			add_action( 'wp_footer', array( $this, 'popup' ) );
+		}
 
 		add_filter( 'woocommerce_product_tabs', array( $this, 'product_tabs' ), 20 );
 	}
@@ -53,7 +55,7 @@ class WPSG_Frontend {
 
 		if ( is_product() ) {
 			wp_enqueue_style( 'wpsg-frontend-style' );
-			wp_enqueue_script( 'wpsg-frontend-scripts' );
+			// wp_enqueue_script( 'wpsg-frontend-scripts' );
 		}
 	}
 
