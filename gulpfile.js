@@ -30,8 +30,9 @@ function deploy() {
 			'!package.json',
 			'!phpunit.xml.dist',
 			'!README.md',
-			'!assets/css/admin.less',
+			'!assets/css/*.less',
 			'!assets/js/admin.js',
+			'!assets/js/scripts.js',
 			'!' + slug + '.zip'])
 			.pipe(dest(slug));
 }
