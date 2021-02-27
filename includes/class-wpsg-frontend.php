@@ -29,16 +29,25 @@ class WPSG_Frontend {
 	 * @since 1.0.0
 	 */
 	public function init_hooks() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_assets' ) );
+		$enabled = get_option( 'wpsg_enable_size_guide', 'yes' );
 
+		if ( $enabled === 'no' ) {
+			return;
+		}
+
+		$position = get_option( 'wpsg_size_guide_position', 'tab' );
+
+		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_assets' ) );
 		add_action( 'woocommerce_before_single_product', array( $this, 'get_size_guide' ) );
 
-		if ( false ) {
+		if ( $position == 'popup' || $position == 'both' ) {
 			add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'popup_button' ) );
 			add_action( 'wp_footer', array( $this, 'popup' ) );
 		}
 
-		add_filter( 'woocommerce_product_tabs', array( $this, 'product_tabs' ), 20 );
+		if ( $position == 'tab' || $position == 'both' ) {
+			add_filter( 'woocommerce_product_tabs', array( $this, 'product_tabs' ), 20 );
+		}
 	}
 
 	/**
@@ -55,7 +64,7 @@ class WPSG_Frontend {
 
 		if ( is_product() ) {
 			wp_enqueue_style( 'wpsg-frontend-style' );
-			// wp_enqueue_script( 'wpsg-frontend-scripts' );
+			wp_enqueue_script( 'wpsg-frontend-scripts' );
 		}
 	}
 

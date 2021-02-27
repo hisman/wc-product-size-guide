@@ -77,19 +77,19 @@ class WC_Product_Size_Guide {
 	}
 
 	/**
-     * Show action links on the plugin screen.
-     *
-     * @param	mixed $links Plugin Action links
-     * @return  array
-     * @since   1.0.0
-     **/
+	 * Show action links on the plugin screen.
+	 *
+	 * @param	mixed $links Plugin Action links
+	 * @return  array
+	 * @since   1.0.0
+	 **/
 	public function plugin_action_links( $links ){
-        $action_links = array(
+		$action_links = array(
 			'settings' => '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=products&section=wc-product-size-guide' ) . '" aria-label="' . esc_attr__( 'View Product Size Guide settings', 'wc-product-size-guide' ) . '">' . esc_html__( 'Settings', 'wc-product-size-guide' ) . '</a>',
 		);
 
 		return array_merge( $action_links, $links );
-    }
+	}
 
 }
 

@@ -64,7 +64,7 @@ class WPSG_Settings {
 				'title'    => __( 'Enable', 'wc-product-size-guide' ),
 				'desc'     => __( 'Enable Size Guide', 'wc-product-size-guide' ),
 				'id'       => 'wpsg_enable_size_guide',
-				'default'  => 'no',
+				'default'  => 'yes',
 				'type'     => 'checkbox',
 			),
 
@@ -75,6 +75,7 @@ class WPSG_Settings {
 				'default'  => '',
 				'type'     => 'select',
 				'desc_tip' => true,
+				'default' => 'tab',
 				'options'  => array(
 					'popup' => 'Popup',
 					'tab' => 'Product Tabs',
