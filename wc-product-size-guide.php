@@ -10,8 +10,8 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       wc-product-size-guide
  * Domain Path:       /languages
- * WC tested up to:      3.9.2
- * WC requires at least: 3.0.0
+ * WC tested up to:      5.0.0
+ * WC requires at least: 4.0.0
  *
  * @since             1.0.0
  * @package           WC_Product_Size_Guide
@@ -72,6 +72,7 @@ class WC_Product_Size_Guide {
 		include_once( 'includes/class-wpsg-size-guide.php' );
 		include_once( 'includes/class-wpsg-admin.php' );
 		include_once( 'includes/class-wpsg-frontend.php' );
+		include_once( 'includes/class-wpsg-rest-api.php' );
 		include_once( 'includes/wpsg-template-functions.php' );
 		include_once( 'includes/wpsg-template-hooks.php' );
 	}
