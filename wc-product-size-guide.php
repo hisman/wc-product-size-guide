@@ -21,10 +21,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Check if WooCommerce is active
-// if ( ! class_exists( 'WooCommerce' ) ) {
-// 	return;
-// }
+/**
+ * Check if WooCommerce is active
+ **/
+if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+    return;
+}
 
 // Define WPSG_PLUGIN_FILE.
 if ( ! defined( 'WPSG_PLUGIN_FILE' ) ) {
