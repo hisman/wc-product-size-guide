@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name:       Product Size Guide for WooCommerce
- * Plugin URI:        https://plugins.hisman.co/product-size-guide-for-woocommerce
+ * Plugin URI:        https://github.com/hisman/wc-product-size-guide
  * Description:       Allows you to add size guides for your WooCommerce products.
  * Version:           1.0.0
  * Author:            Hisman
- * Author URI:        https://hisman.co
+ * Author URI:        https://hisman.org
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       wc-product-size-guide
